@@ -1,8 +1,24 @@
-import React from "react";
+import React,{useContext,useState} from "react";
+import { PostUserData } from "./api";
+import UserContext from "./usercontext"
 
-function CreateUser() {
+function CreateUser(props) {
+  let users = useContext(UserContext)
+
+  let [userName,setUserName] = useState("")
+  let [userEmail,setUserEmail] = useState("")
+  let userData ={name:userName,email:userEmail}
+  
   return (
     <>
+      <form onSubmit ={async(e)=>{
+        e.preventDefault()
+        //users.setUserList([...users.userList,userData])
+        console.log(userData)
+       await PostUserData(userData)
+        setUserName("")
+        setUserEmail("")
+      }}>
       <div className="Container">
         <div className="row">
           <div className="col-lg-6">
@@ -11,12 +27,16 @@ function CreateUser() {
               className="form-control"
               type="text"
               placeholder="YourName"
+              value ={userName} onChange ={(e)=>
+              setUserName(e.target.value)}
             /> <br/>
             <label>EmailAddress</label>
             <input
               className="form-control"
-              type="email"
+              type="text"
               placeholder="name@email.com"
+              value ={userEmail} onChange ={(e)=>
+                setUserEmail(e.target.value)}
             />
           </div>
         </div><br/>
@@ -25,6 +45,8 @@ function CreateUser() {
 
         </div>
       </div>
+      {/* <button onClick={()=>{users.setUserList([...users.userList,{userName:"kumar",age:30}])}}>Add</button> */}
+      </form>
     </>
   );
 }
