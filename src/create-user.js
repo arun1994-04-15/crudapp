@@ -7,15 +7,15 @@ function CreateUser(props) {
 
   let [userName,setUserName] = useState("")
   let [userEmail,setUserEmail] = useState("")
-  let userData ={name:userName,email:userEmail}
+  let userData ={userName,userEmail}
   
   return (
     <>
-      <form onSubmit ={async(e)=>{
+      <form onSubmit ={(e)=>{
         e.preventDefault()
-        //users.setUserList([...users.userList,userData])
+        users.setUserList([...users.userList,userData])
         console.log(userData)
-       await PostUserData(userData)
+      //  await PostUserData(userData)
         setUserName("")
         setUserEmail("")
       }}>
@@ -52,3 +52,5 @@ function CreateUser(props) {
 }
 
 export default CreateUser;
+
+
